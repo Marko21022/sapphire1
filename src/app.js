@@ -1,24 +1,21 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-const { initDiscord } = require('./discord');
-const routes = require('./routes');
-
-dotenv.config();
-
 const app = express();
+
+app.use(express.json());
+
+// Example API routes
+app.post('/api/ban', async (req, res) => {
+  // Your ban logic here (e.g., calling Discord API)
+  res.send('Ban request received');
+});
+
+app.post('/api/kick', async (req, res) => {
+  // Your kick logic here (e.g., calling Discord API)
+  res.send('Kick request received');
+});
+
+// Start the server
 const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(bodyParser.json());
-app.use(express.static('public')); // Serve frontend
-
-// Routes
-app.use('/api', routes);
-
-// Initialize Discord client
-initDiscord();
-
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
