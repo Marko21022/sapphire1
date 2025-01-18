@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Discord Admin Panel</h1>
+  <div>
+    <input id="userId" placeholder="User ID">
+    <input id="reason" placeholder="Reason">
+    <button onclick="banUser()">Ban User</button>
+    <button onclick="kickUser()">Kick User</button>
+  </div>
+  <script>
+    const banUser = async () => {
+      const userId = document.getElementById('userId').value;
+      const reason = document.getElementById('reason').value;
+      await fetch('/api/ban', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ guildId: 'YOUR_GUILD_ID', userId, reason }),
+      });
+    };
+
+    const kickUser = async () => {
+      const userId = document.getElementById('userId').value;
+      const reason = document.getElementById('reason').value;
+      await fetch('/api/kick', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ guildId: 'YOUR_GUILD_ID', userId, reason }),
+      });
+    };
+  </script>
+</body>
+</html>
